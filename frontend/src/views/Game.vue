@@ -1,3 +1,3 @@
 <template lang="pug">
-  p about
+  p game area
 </template>

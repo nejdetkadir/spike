@@ -1,3 +1,3 @@
 <template lang="pug">
-  p about
+  p score board
 </template>
