@@ -15,6 +15,7 @@ const User = require('./models/user')
 
 // routes
 const accountRouter = require('./routes/account');
+const quizRouter = require('./routes/quiz')
 
 // mongodb
 const {mongoose} = require('./helpers/db')
@@ -66,6 +67,7 @@ app.all('*', (req, res, next) => {
 })
 
 app.use('/account', accountRouter);
+app.use('/quiz', quizRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
