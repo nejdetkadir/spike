@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import SignIn from '../views/users/SignIn'
+import SignUp from '../views/users/SignUp'
+import Game from '../views/Game'
+import ScoreBoard from '../views/ScoreBoard'
 
 Vue.use(VueRouter)
 
@@ -14,6 +18,26 @@ export default function init(store) {
         path: '/',
         name: 'home',
         component: Home,
+      },
+      {
+        path: '/users/sign_in',
+        name: 'signin',
+        component: SignIn
+      },
+      {
+        path: '/users/sign_up',
+        name: 'signup',
+        component: SignUp
+      },
+      {
+        path: '/game',
+        name: 'game',
+        component: Game
+      },
+      {
+        path: '/score-board',
+        name: 'scoreboard',
+        component: ScoreBoard
       },
       {
         path: '/about',
