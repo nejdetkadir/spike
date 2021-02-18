@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
 import account from './modules/account'
+import quiz from './modules/quiz'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,8 @@ axios.defaults.withCredentials = true
 /* eslint-disable no-new */
 const store = new Vuex.Store({
   modules: {
-    account
+    account,
+    quiz
   } 
 })
 
