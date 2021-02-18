@@ -9,7 +9,6 @@ import ScoreBoard from '../views/ScoreBoard'
 Vue.use(VueRouter)
 
 export default function init(store) {
-  console.log(store);
   return new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
@@ -18,26 +17,46 @@ export default function init(store) {
         path: '/',
         name: 'home',
         component: Home,
+        beforeEnter(to, from, next) {
+          if (store.state.account.user) return next('/game')
+          return next()
+        }
       },
       {
         path: '/users/sign_in',
         name: 'signin',
-        component: SignIn
+        component: SignIn,
+        beforeEnter(to, from, next) {
+          if (store.state.account.user) return next('/game')
+          return next()
+        }
       },
       {
         path: '/users/sign_up',
         name: 'signup',
-        component: SignUp
+        component: SignUp,
+        beforeEnter(to, from, next) {
+          if (store.state.account.user) return next('/game')
+          return next()
+        }
       },
       {
         path: '/game',
         name: 'game',
-        component: Game
+        component: Game,
+        beforeEnter(to, from, next) {
+          if (!store.state.account.user) return next('/users/sign_in?userStatus=0')
+          return next()
+        }
       },
       {
         path: '/score-board',
         name: 'scoreboard',
-        component: ScoreBoard
+        component: ScoreBoard,
+        beforeEnter(to, from, next) {
+          if (!store.state.account.user) return next('/users/sign_in?userStatus=0')
+          return next()
+        }
       },
       {
         path: '/about',
