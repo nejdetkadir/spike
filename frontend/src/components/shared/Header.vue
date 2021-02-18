@@ -11,7 +11,7 @@
           li.nav-item
             router-link.nav-link(to="/score-board") Score Board
         .d-flex
-          li.nav-item.dropdown(v-if="!isAuth")
+          li.nav-item.dropdown(v-if="!user")
             a#navbarDropdown.nav-link.dropdown-toggle.text-white(href='#' role='button' data-bs-toggle='dropdown' aria-expanded='false') Sign in/up
             ul.dropdown-menu(aria-labelledby='navbarDropdown')
               li
@@ -19,21 +19,23 @@
               li
                 router-link.dropdown-item(to="/users/sign_up") Sign up
           li.nav-item(v-else)
-            button.btn.btn-default(@click.prevent="logout") Logout
+            button.btn.btn-default.text-white(@click.prevent="doLogout") ({{user.name.split(" ")[0]}}) Logout 
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      isAuth: false
-    }
-  },
-  methods: {
-    logout() {
+import { mapState, mapActions } from 'vuex'
 
+export default {
+  methods: {
+    ...mapActions('account', ['logout']),
+    async doLogout() {
+      await this.logout()
+      this.$router.push('/users/sign_in?logoutSuccess=1')
     }
   },
+  computed: {
+    ...mapState('account', ['user'])
+  }
 }
 </script>
 
