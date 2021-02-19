@@ -5,7 +5,7 @@
         tr
           th(scope='col') #
           th(scope='col') Name
-          th(scope='col') Category
+          th(scope='col') Email
           th(scope='col') Score
           th(scope='col') Last Played
       tbody
@@ -14,7 +14,7 @@
           td {{s.name}}
           td {{s.email}}
           td {{s.totalScore}}
-          td {{ moment(s.updatedAt).fromNow() }}
+          td {{ s.updatedAt == s.createdAt ? '-' : moment(s.updatedAt).fromNow() }}
 </template>
 
 <script>
