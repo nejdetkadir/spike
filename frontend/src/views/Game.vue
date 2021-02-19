@@ -150,7 +150,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('quiz', ['fetchQuestions']),
+    ...mapActions('quiz', ['fetchQuestions', 'saveQuiz']),
     async startGame() {
       try {
         this.form.buttonDisable = true
@@ -186,7 +186,10 @@ export default {
         this.game.answers[i].answer === this.questions[i].correct_answer ? this.game.gameScore+=5 : undefined
       }
       this.game.finishedAt = Date.now()
-      
+      this.saveQuiz({
+        category: this.questions[0].category,
+        score: this.game.gameScore
+      })
     },
     newGame() {
       this.form.buttonDisable = false

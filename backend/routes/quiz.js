@@ -24,6 +24,16 @@ router.get('/score-board', quizController.ensureLogin, async (req, res, next) =>
   res.json(scores)
 })
 
+router.post('/', quizController.ensureLogin, async (req, res, next) => {
+  const {category, score} = req.body
+  await new Quiz({
+    user: req.user._id,
+    category,
+    score
+  }).save()
+  res.send('OK')
+})
+
 router.get('/questions/:code', quizController.ensureLogin, async (req, res, next) => {
   if(req.params.code >=9 && req.params.code <=32) {
     request(`https://opentdb.com/api.php?amount=20&category=${req.params.code}&difficulty=medium&type=multiple`, function (error, response, body) {

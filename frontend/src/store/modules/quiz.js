@@ -7,7 +7,8 @@ const mutations = {
 
 const actions = {
   FETCH_SCORE_BOARD: 'fetchScoreBoard',
-  FETCH_QUESTIONS: 'fetchQuestions'
+  FETCH_QUESTIONS: 'fetchQuestions',
+  SAVE_QUIZ: 'saveQuiz'
 }
 
 const quiz = {
@@ -44,6 +45,9 @@ const quiz = {
         })
       }
       commit(mutations.SET_QUESTIONS, tempArr)
+    },
+    async [actions.SAVE_QUIZ](state, data) {
+      await axios.post('/quiz', data)
     },
   }
 }
