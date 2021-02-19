@@ -1,37 +1,32 @@
 const express = require('express')
 const router = express.Router()
 const Quiz = require('../models/quiz')
+const User = require('../models/user')
 const quizController = require('../controllers/quiz')
 const request = require('request');
 
 router.get('/score-board', quizController.ensureLogin, async (req, res, next) => {
-  const scores = await Quiz.aggregate([
-    {
-      $lookup: {
-        from: 'users',
-        localField: 'user',
-        foreignField: '_id',
-        as: 'user'
-      }
-    },
-    {
-      $unwind: '$user'
-    },
-    {
-      $unset: ["user._id", "user.salt", "user.hash", "user.createdAt", "user.updatedAt", "user.__v", "user.email"]
-    }
-  ])
+  const scores = await User.find().sort({ totalScore: -1 }).limit(20)
   res.json(scores)
 })
 
 router.post('/', quizController.ensureLogin, async (req, res, next) => {
+  
   const {category, score} = req.body
-  await new Quiz({
-    user: req.user._id,
-    category,
-    score
-  }).save()
-  res.send('OK')
+  if (score > -1 && score < 101) {
+    await new Quiz({
+      user: req.user._id,
+      category,
+      score
+    }).save()
+    await User.findByIdAndUpdate(req.user._id, {
+      totalScore: score+req.user.totalScore
+    })
+    res.send('OK')
+  } else {
+    next(new Error("Unauthorized access"))
+  }
+  
 })
 
 router.get('/questions/:code', quizController.ensureLogin, async (req, res, next) => {
