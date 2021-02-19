@@ -42,8 +42,6 @@ export default {
         status: 'before',
         lastIndex: 0,
         answers: [],
-        startedAt: null,
-        finishedAt: null,
         selectedOption: -1,
         gameError: null,
         gameScore: null
@@ -137,7 +135,6 @@ export default {
         this.backendError = null
         await this.fetchQuestions(this.form.category)
         this.game.status = 'active'
-        this.game.startedAt = Date.now()
         this.game.gameScore = null
       } catch (error) {
         this.backendError = error.response.data.message
@@ -165,7 +162,6 @@ export default {
       for (let i = 0; i < this.game.answers.length; i++) {
         this.game.answers[i].answer === this.questions[i].correct_answer ? this.game.gameScore+=5 : undefined
       }
-      this.game.finishedAt = Date.now()
       this.saveQuiz({
         category: this.questions[0].category,
         score: this.game.gameScore
@@ -174,6 +170,8 @@ export default {
     newGame() {
       this.form.buttonDisable = false
       this.game.status = 'before'
+      this.game.answers = []
+      this.game.lastIndex = 0
     },
     scoreMessages() {
       let obj = ''
