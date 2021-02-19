@@ -188,5 +188,16 @@ export default {
   computed: {
     ...mapState('quiz', ['questions'])
   },
+  beforeRouteLeave(to, from, next) {
+    if (this.game.status == 'active') {
+      if (confirm("Your exam is not over yet, Are you sure want to go other page?")) {
+        next();
+      } else {
+        next(false)
+      }
+    } else {
+      next();
+    }
+  },
 }
 </script>
