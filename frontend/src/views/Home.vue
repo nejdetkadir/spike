@@ -1,5 +1,6 @@
 <template lang="pug">
-  p home
+  .text-center
+    img.img-fluid(src="@/assets/cover.jpg")
 </template>
 
 <script>
