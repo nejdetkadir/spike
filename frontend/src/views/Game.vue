@@ -67,20 +67,12 @@ export default {
           code: '12'
         },
         {
-          name: 'Entertainment: Musicals & Theatres',
-          code: '13'
-        },
-        {
           name: 'Entertainment: Television',
           code: '14'
         },
         {
           name: 'Entertainment: Video Games',
           code: '15'
-        },
-        {
-          name: 'Entertainment: Board Games',
-          code: '16'
         },
         {
           name: 'Entertainment: Comics',
@@ -103,14 +95,6 @@ export default {
           code: '18'
         },
         {
-          name: 'Science: Mathematics',
-          code: '19'
-        },
-        {
-          name: 'Science: Gadgets',
-          code: '30'
-        },
-        {
           name: 'Mythology',
           code: '20'
         },
@@ -129,10 +113,6 @@ export default {
         {
           name: 'Politics',
           code: '24'
-        },
-        {
-          name: 'Art',
-          code: '25'
         },
         {
           name: 'Celebrities',
